@@ -1,0 +1,1 @@
+add_executable(hard_poll_no_queue hard_poll_no_queue.c)

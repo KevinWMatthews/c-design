@@ -85,7 +85,7 @@ If multiple optimization levels are applied, the last optimization level is used
 #]]
 if(OPTIMIZE)
     set(GCC_OPTIMIZATION_VALUES
-        O0 O1 02 03 Og Os Ofast
+        O0 O1 O2 O3 Og Os Ofast
         CACHE
         INTERNAL
         "List of possible values for the GCC_OPTIMIZATION variable"

@@ -11,5 +11,10 @@ list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
 
 option(OPTIMIZE "Set a custom optimization value" OFF)
 include(GccOptions)
+include(GccCustomTargets)
 
 add_subdirectory(asan)
+add_subdirectory(event_loop)
+add_subdirectory(my_epoll)
+add_subdirectory(my_signal)
+add_subdirectory(shared_state)

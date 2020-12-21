@@ -1,0 +1,4 @@
+add_executable(api_race_volatile api_race_volatile.c)
+add_executable(api_race_gnuc_sync api_race_gnuc_sync.c)
+add_executable(api_race_stdatomic api_race_stdatomic.c)
+add_executable(api_race_stdatomic_fence api_race_stdatomic_fence.c)
