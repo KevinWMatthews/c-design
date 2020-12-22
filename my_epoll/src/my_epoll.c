@@ -7,6 +7,7 @@
 #include <assert.h>
 #include <unistd.h>
 
+// TODO make CLOEXEC an option
 my_epoll_t my_epoll_open(void)
 {
     int fd = epoll_create1(EPOLL_CLOEXEC);

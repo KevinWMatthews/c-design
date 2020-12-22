@@ -1,0 +1,4 @@
+add_executable(timerfd_blocking timerfd_blocking.c)
+
+add_executable(my_timerfd_blocking my_timerfd_blocking.c)
+target_link_libraries(my_timerfd_blocking PRIVATE my_timerfd::my_timerfd)
