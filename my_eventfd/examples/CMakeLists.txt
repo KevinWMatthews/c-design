@@ -1,0 +1,2 @@
+add_executable(eventfd_blocking eventfd_blocking.c)
+add_executable(eventfd_nonblocking eventfd_nonblocking.c)
