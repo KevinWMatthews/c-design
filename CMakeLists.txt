@@ -13,6 +13,10 @@ option(OPTIMIZE "Set a custom optimization value" OFF)
 include(GccOptions)
 include(GccCustomTargets)
 
+set(CMAKE_THREAD_PREFER_PTHREAD ON)
+set(THREADS_PREFER_PTHREAD_FLAG ON)
+find_package(Threads)
+
 add_subdirectory(asan)
 add_subdirectory(event_loop)
 add_subdirectory(my_epoll)

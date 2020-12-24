@@ -4,10 +4,6 @@ if(NOT HAVE_SIGNAL_H)
     message(FATAL_ERROR "Could not find system header file: <signal.h>")
 endif()
 
-set(CMAKE_THREAD_PREFER_PTHREAD ON)
-set(THREADS_PREFER_PTHREAD_FLAG ON)
-find_package(Threads)
-
 add_executable(sigmask_single_thread examples/sigmask_single_thread.c)
 target_link_libraries(sigmask_single_thread PRIVATE Threads::Threads)
 
