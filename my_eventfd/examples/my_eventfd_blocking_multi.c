@@ -2,8 +2,8 @@
  * @file my_eventfd_blocking_multi.c
  */
 #include "my_eventfd.h"
+#include "my_pthread.h"
 #include <stdio.h>
-#include <pthread.h>
 #include <inttypes.h>
 #include <unistd.h>
 #include <assert.h>
@@ -40,22 +40,14 @@ void *reader_thread(void *param)
 int main(void)
 {
     printf("Starting...\n");
-    int err;
 
     my_eventfd_t efd = my_eventfd_open(0, MY_EVENTFD_FLAGS_BLOCKING);
 
-    pthread_t reader_handle;
-    err = pthread_create(&reader_handle, NULL, reader_thread, &efd);
-    assert(!err);
+    pthread_t reader_handle = my_pthread_create_noattr(reader_thread, &efd);
+    pthread_t writer_handle = my_pthread_create_noattr(writer_thread, &efd);
 
-    pthread_t writer_handle;
-    err = pthread_create(&writer_handle, NULL, writer_thread, &efd);
-    assert(!err);
-
-    err = pthread_join(writer_handle, NULL);
-    assert(!err);
-    err = pthread_join(reader_handle, NULL);
-    assert(!err);
+    my_pthread_join_noarg(writer_handle);
+    my_pthread_join_noarg(reader_handle);
 
     my_eventfd_close(efd);
 

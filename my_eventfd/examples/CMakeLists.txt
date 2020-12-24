@@ -18,7 +18,7 @@ add_executable(my_eventfd_blocking_multi my_eventfd_blocking_multi.c)
 target_link_libraries(my_eventfd_blocking_multi
     PRIVATE
     my_eventfd::my_eventfd
-    Threads::Threads
+    my_pthread::my_pthread
     )
 
 add_executable(my_eventfd_nonblocking my_eventfd_nonblocking.c)
