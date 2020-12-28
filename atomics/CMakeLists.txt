@@ -1,0 +1,2 @@
+add_executable(acquire_release acquire_release.c)
+target_link_libraries(acquire_release PRIVATE my_pthread::my_pthread)

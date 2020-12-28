@@ -18,6 +18,7 @@ set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads)
 
 add_subdirectory(asan)
+add_subdirectory(atomics)
 add_subdirectory(event_loop)
 add_subdirectory(my_epoll)
 add_subdirectory(my_eventfd)
