@@ -15,7 +15,7 @@ static volatile atomic_bool event2_flag;
 int main(void)
 {
     printf("Starting...\n");
-    __useconds_t loop_delay_ms = 100;
+    useconds_t loop_delay_ms = 100;
 
     while (1)
     {
@@ -33,7 +33,7 @@ int main(void)
         }
 
         /*
-         * Must sleep to avoid eating all the CPU.
+         * Sleep to avoid eating all the CPU.
          * However, this can miss events that occur more frequently than the sleep period.
          */
         usleep(loop_delay_ms * 1000);
