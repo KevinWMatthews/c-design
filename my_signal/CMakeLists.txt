@@ -4,13 +4,19 @@ if(NOT HAVE_SIGNAL_H)
     message(FATAL_ERROR "Could not find system header file: <signal.h>")
 endif()
 
-add_executable(sigmask_single_thread examples/sigmask_single_thread.c)
-target_link_libraries(sigmask_single_thread PRIVATE Threads::Threads)
+add_library(my_signal
+    src/my_signal.c
+    )
+target_include_directories(my_signal
+    PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    )
+target_link_libraries(my_signal
+    PRIVATE
+    # pthread is required to set the sigmask for a thread
+    Threads::Threads
+    )
+add_library(my_signal::my_signal ALIAS my_signal)
 
-add_executable(signal_flag_bad examples/signal_flag_bad.c)
-target_link_libraries(signal_flag_bad PRIVATE Threads::Threads)
-create_custom_gcc_targets(TARGET_NAME signal_flag_bad)
+#TODO add <signal.h> to public interface
 
-add_executable(signal_flag_good examples/signal_flag_good.c)
-target_link_libraries(signal_flag_good PRIVATE Threads::Threads)
-create_custom_gcc_targets(TARGET_NAME signal_flag_good)
+add_subdirectory(examples)
