@@ -30,7 +30,7 @@ int main(void)
             {
                 // epoll() returns failure if interrupted by a signal
                 // gdb can't place breakpoints at runtime,
-                // so debuggers typically send SIGSTOP
+                // so debuggers may send SIGSTOP, place a breakpoint, and then resume
                 continue;
             }
         }

@@ -5,7 +5,7 @@
 #include <assert.h>
 #include <stddef.h>
 
-void my_event_setup(struct my_epoll_event_t *event,
+void my_epoll_event_setup(struct my_epoll_event_t *event,
     int fd_event,
     my_epoll_event_data_t data,
     my_epoll_event_process_fp process)
@@ -48,7 +48,7 @@ struct my_epoll_event_t *my_epoll_event_wait_single(my_epoll_t fd_epoll, int tim
     int event_list_len = sizeof(event_list) / sizeof(*event_list);
     int n_events = my_epoll_wait(fd_epoll, event_list, event_list_len, timeout_ms);
     assert(n_events != -1);
-    if (n_events == 0)
+    if (n_events == 0)  // This indicates a timeout
     {
         return NULL;
     }

@@ -27,25 +27,25 @@ struct my_epoll_event_t
 void my_epoll_event_setup(struct my_epoll_event_t *event,
     int fd_event,
     my_epoll_event_data_t data,
-    my_epoll_event_process_fp process);
+    my_epoll_event_process_fp process) __nonnull();
 
 void my_epoll_event_add_input(my_epoll_t fd_epoll,
     enum my_epoll_flags_t flags,
-    struct my_epoll_event_t *my_event);
+    struct my_epoll_event_t *my_event) __nonnull();
 
 void my_epoll_event_add_output(my_epoll_t fd_epoll,
     enum my_epoll_flags_t flags,
-    struct my_epoll_event_t *my_event);
+    struct my_epoll_event_t *my_event) __nonnull();
 
-void my_epoll_event_delete(my_epoll_t fd_epoll, struct my_epoll_event_t *my_event);
+void my_epoll_event_delete(my_epoll_t fd_epoll, struct my_epoll_event_t *my_event) __nonnull();
 
 // implement when needed
-// void my_epoll_event_delete(my_epoll_t fd_epoll, struct my_epoll_event_t *my_event);
+// void my_epoll_event_delete(my_epoll_t fd_epoll, struct my_epoll_event_t *my_event) __nonnull();
 
 // For convenience in example apps
 struct my_epoll_event_t *my_epoll_event_wait_single(my_epoll_t fd_epoll, int timeout_ms);
 
-void my_epoll_event_process(my_epoll_t fd_epoll, struct my_epoll_event_t *event);
+void my_epoll_event_process(my_epoll_t fd_epoll, struct my_epoll_event_t *event) __nonnull();
 
 #endif
 
