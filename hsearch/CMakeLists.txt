@@ -1,0 +1,6 @@
+include(CheckIncludeFile)
+check_include_file(sys/epoll.h HAVE_SYS_EPOLL_H)
+if(NOT HAVE_SYS_EPOLL_H)
+    message(FATAL_ERROR "Could not find sys/epoll.h")
+endif()
+add_subdirectory(examples)

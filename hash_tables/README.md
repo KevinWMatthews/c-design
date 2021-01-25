@@ -10,6 +10,10 @@
 * POSIX: hsearch
   - [linux docs](https://man7.org/linux/man-pages/man3/hsearch.3.html)
   - [gnu docs](https://www.gnu.org/software/libc/manual/html_node/Hash-Search-Function.html)
+  - implementation in `misc/search.h`/`misc/hsearch_r.c`
+* glibc
+  - implementation in `elf/stringtable.h`/`elf/stringtable.c`
+  - see commit [785969a047](https://sourceware.org/git/?p=glibc.git;a=commit;h=785969a047ad2f23f758901c6816422573544453)
 * gnulib
   - [module list](https://www.gnu.org/software/gnulib/MODULES.html#ansic_ext_container)
 * Glib
