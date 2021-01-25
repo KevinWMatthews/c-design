@@ -8,8 +8,13 @@
 int main(void)
 {
     printf("Leak some memory?\n");
+    // Dynamically allocate memory
     char *string1 = strdup("This is a string");
+
+    // Use the memory to produce a side effect so the optimizer can't remove the memory allocation
     printf("%s\n", string1);
+
+    // Clean up the memory (or not)
     /*
     free(string1);
     // */
@@ -19,13 +24,15 @@ int main(void)
     abort();
     // */
 
-    // If the program exits success and there is a leak, asan will override the return code
-    //*
+    // If the program exits success and there is a leak,
+    // asan will override the application's return code with its own and report memory leaks
+    /*
     exit(EXIT_SUCCESS);
     // */
 
-    // If the program exits failure and there is a leak, asan reports the return code
-    /*
-    exit(EXIT_FAILURE);
+    // If the program exits failure and there is a leak,
+    // asan will override the application's return code with its own and report memory leaks
+    //*
+    exit(-42);
     // */
 }

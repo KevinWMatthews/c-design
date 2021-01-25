@@ -1,0 +1,5 @@
+add_executable(signal_unsafe_function signal_unsafe_function.c)
+target_link_libraries(signal_unsafe_function PRIVATE my_signal::my_signal)
+
+add_executable(signal_unsafe_errno signal_unsafe_errno.c)
+target_link_libraries(signal_unsafe_errno PRIVATE my_signal::my_signal)

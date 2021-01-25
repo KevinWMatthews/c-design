@@ -84,7 +84,7 @@ void my_signal_set_sigaction(int signal_num,
     // sa_mask may be null?
     const struct sigaction action = {
         .sa_handler = signal_handler,
-        .sa_mask = *signal_mask,    // TODO does this work as expected?
+        .sa_mask = *signal_mask,    // TODO does this work as expected? No!
         .sa_flags = flags,
     };
     struct sigaction old_signal_action = {0};
@@ -94,10 +94,16 @@ void my_signal_set_sigaction(int signal_num,
 
 void my_signal_set_sigaction2(int signal_num, my_signal_handler_t signal_handler)
 {
-    my_signal_set_sigaction(signal_num, signal_handler, NULL, MY_SIGNAL_SIGACTION_FLAG_NONE);
+    sigset_t signal_mask = {0};
+    my_signal_empty_set(&signal_mask);
+    my_signal_set_sigaction(signal_num, signal_handler, &signal_mask,
+        MY_SIGNAL_SIGACTION_FLAG_NONE);
 }
 
 void my_signal_set_sigaction_oneshot(int signal_num, my_signal_handler_t signal_handler)
 {
-    my_signal_set_sigaction(signal_num, signal_handler, NULL, MY_SIGNAL_SIGACTION_FLAG_ONESHOT);
+    sigset_t signal_mask = {0};
+    my_signal_empty_set(&signal_mask);
+    my_signal_set_sigaction(signal_num, signal_handler, &signal_mask,
+        MY_SIGNAL_SIGACTION_FLAG_ONESHOT);
 }

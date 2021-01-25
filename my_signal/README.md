@@ -112,3 +112,14 @@ This could occur:
 
 Synchronous signal delivery is possible *only* if the signal is blocked.
 If the signal disposition is not changed, then the process will simply be terminated.
+
+* [signal safety](https://man7.org/linux/man-pages/man7/signal-safety.7.html)
+* [SIG00-C](https://wiki.sei.cmu.edu/confluence/display/c/SIG00-C.+Mask+signals+handled+by+noninterruptible+signal+handlers)
+* [SIG01-C](https://wiki.sei.cmu.edu/confluence/display/c/SIG01-C.+Understand+implementation-specific+details+regarding+signal+handler+persistence)
+* [SIG02-C](https://wiki.sei.cmu.edu/confluence/display/c/SIG02-C.+Avoid+using+signals+to+implement+normal+functionality)
+* [SIG30-C](https://wiki.sei.cmu.edu/confluence/display/c/SIG30-C.+Call+only+asynchronous-safe+functions+within+signal+handlers)
+* [SIG31-C](https://wiki.sei.cmu.edu/confluence/display/c/SIG31-C.+Do+not+access+shared+objects+in+signal+handlers)
+* [SIG34-C](https://wiki.sei.cmu.edu/confluence/display/c/SIG34-C.+Do+not+call+signal%28%29+from+within+interruptible+signal+handlers)
+* [SIG35-C](https://wiki.sei.cmu.edu/confluence/display/c/SIG35-C.+Do+not+return+from+a+computational+exception+signal+handler)
+* [CON37-C](https://wiki.sei.cmu.edu/confluence/display/c/CON37-C.+Do+not+call+signal%28%29+in+a+multithreaded+program)
+* [ERR32-C](https://wiki.sei.cmu.edu/confluence/display/c/ERR32-C.+Do+not+rely+on+indeterminate+values+of+errno)
