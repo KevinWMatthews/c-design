@@ -1,5 +1,5 @@
 include(CheckIncludeFile)
-CHECK_INCLUDE_FILE("signal.h" HAVE_SIGNAL_H)
+check_include_file("signal.h" HAVE_SIGNAL_H)
 if(NOT HAVE_SIGNAL_H)
     message(FATAL_ERROR "Could not find system header file: <signal.h>")
 endif()
