@@ -38,8 +38,9 @@ int main(void)
     // read() will block until the timer expires
     printf("Waiting for timeout...\n");
     uint64_t n_timeouts = 0;
-    err = read(tfd, &n_timeouts, sizeof(n_timeouts));
-    assert(err == sizeof(uint64_t));
+    ssize_t buffer_size = sizeof(n_timeouts);
+    ssize_t n_read = read(tfd, &n_timeouts, buffer_size);
+    assert(n_read == buffer_size);
     printf("Timer timed out '%" PRIu64 "' times\n", n_timeouts);
 
     // if the timer is one-shot, this will block forever!
