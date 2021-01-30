@@ -17,3 +17,11 @@ POSIX hash search tables.
 * Uses `calloc()`.
 
 Request to [change hashing algorithm](https://sourceware.org/bugzilla/show_bug.cgi?id=25924).
+
+## TODO
+
+Run examples Linux docs:
+
+* https://man7.org/linux/man-pages/man3/hsearch.3.html
+* https://man7.org/linux/man-pages/man3/hsearch.3p.html
+* https://man7.org/linux/man-pages/man3/hsearch_r.3.html
