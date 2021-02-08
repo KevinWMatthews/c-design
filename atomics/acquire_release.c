@@ -16,7 +16,8 @@ struct thread_params_t
     // Access to the value is unsafe
     int value;
     // The flag is not atomic but individual accesses are
-    bool ready_flag;
+    // TODO does this need to be atomic_bool?
+    atomic_bool ready_flag;
 };
 
 void* producer_thread(void* param)
