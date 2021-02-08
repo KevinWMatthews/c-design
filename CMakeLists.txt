@@ -12,6 +12,7 @@ list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
 option(OPTIMIZE "Set a custom optimization value" OFF)
 include(GccOptions)
 include(GccCustomTargets)
+include(CompilationDatabase)
 include(Unity)
 
 set(CMAKE_THREAD_PREFER_PTHREAD ON)

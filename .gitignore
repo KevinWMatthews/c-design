@@ -1,1 +1,4 @@
+.cache/
+.clangd/
 .idea/
+compile_commands.json
