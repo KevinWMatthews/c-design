@@ -19,10 +19,10 @@ struct thread_params_t
     bool ready_flag;
 };
 
-void *producer_thread(void *param)
+void* producer_thread(void* param)
 {
     printf("%s: Entering\n", __func__);
-    struct thread_params_t *shared_memory = param;
+    struct thread_params_t* shared_memory = param;
     sleep(2);
     shared_memory->value = 42;
     // "Release" any pending writes to memory
@@ -31,10 +31,10 @@ void *producer_thread(void *param)
     return NULL;
 }
 
-void *consumer_thread(void *param)
+void* consumer_thread(void* param)
 {
     printf("%s: Entering\n", __func__);
-    struct thread_params_t *shared_memory = param;
+    struct thread_params_t* shared_memory = param;
     // how does the optimizer tread while (1) vs while (!flag)?
     // this is a spinlock of sorts?
     // Is there a way to do this without polling?
