@@ -4,6 +4,7 @@
 
 * [journaldev](https://www.journaldev.com/35238/hash-table-in-c-plus-plus)
 * [leetcode exercise](https://leetcode.com/problems/design-hashmap/)
+* [Nearly memory-optimal data structure for sets and mappings](https://dl.acm.org/doi/10.5555/1767111.1767120)
 
 ## Implementations
 
@@ -33,6 +34,7 @@
 * [Apache Runtime](http://apr.apache.org/docs/apr/1.4/group__apr__hash.html)
 * [Naval Postgraduate](http://npsml.sourceforge.net/)
   - [on sourceforge](https://sourceforge.net/p/npsml/code/ci/default/tree/)
+
   * [hash/](https://sourceforge.net/p/npsml/code/ci/default/tree/src/hash/)
 * [C Interfaces and Implementations](http://drh.github.io/cii/)
 * [sglib](http://sglib.sourceforge.net/)

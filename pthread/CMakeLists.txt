@@ -3,6 +3,7 @@ set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads)
 
 add_library(my_pthread
+    include/my_pthread.h
     src/my_pthread.c
     )
 target_include_directories(my_pthread

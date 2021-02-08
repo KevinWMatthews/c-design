@@ -5,7 +5,11 @@
  * This results in undefined behavior according to the C11 spec;
  * signal handlers may only access lock-free atomic or volatile sig_atomic_t types.
  *
- * WARNING: the thread sanitizer interferes with signal delivery!
+ * The optimizer can remove access to non-volatile memory if it can determine that there is no side effect.
+ * In this application, the optimizer sees that the main loop does not alter the flag,
+ * so access can be optimized away!
+ *
+ * @warning: the thread sanitizer interferes with signal delivery!
  * "Generally tsan delivers signals only at designated points, which are some/most syscalls and atomic operations.
  * If code loops in an infinite loop, it may never receive the signal."
  * https://github.com/google/sanitizers/issues/1179

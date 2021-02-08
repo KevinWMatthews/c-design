@@ -46,6 +46,10 @@ int my_epoll_wait(my_epoll_t fd_epoll,
     int event_list_len,
     int timeout_ms);
 
+int my_epoll_ctl(my_epoll_t fd_epoll,
+    int fd_event,
+    enum my_epoll_opcode_t opcode,
+    struct epoll_event *event);
 // TODO double-check lifetime
 // Generic
 void my_epoll_control(my_epoll_t fd_epoll,

@@ -25,7 +25,7 @@ void my_epoll_close(my_epoll_t fd_epoll)
 }
 
 int my_epoll_wait(my_epoll_t fd_epoll,
-    struct epoll_event *event_list,
+    struct epoll_event* event_list,
     int event_list_len,
     int timeout_ms)
 {
@@ -56,10 +56,10 @@ int my_epoll_wait(my_epoll_t fd_epoll,
     }
 }
 
-static int my_epoll_ctl(my_epoll_t fd_epoll,
+int my_epoll_ctl(my_epoll_t fd_epoll,
     int fd_event,
     enum my_epoll_opcode_t opcode,
-    struct epoll_event *event)
+    struct epoll_event* event)
 {
     assert(event);
     return epoll_ctl(fd_epoll.fd, opcode, fd_event, event);
@@ -88,7 +88,7 @@ void my_epoll_add_input(my_epoll_t fd_epoll,
         .events = EPOLLIN | flags,
         .data = data,
     };
-    int err = my_epoll_ctl(fd_epoll, MY_EPOLL_OPCODE_ADD, fd_event, &event);
+    int err = my_epoll_ctl(fd_epoll, fd_event, MY_EPOLL_OPCODE_ADD, &event);
     assert(!err);
 }
 
@@ -101,14 +101,14 @@ void my_epoll_add_output(my_epoll_t fd_epoll,
         .events = EPOLLOUT | flags,
         .data = data,
     };
-    int err = my_epoll_ctl(fd_epoll, MY_EPOLL_OPCODE_ADD, fd_event, &event);
+    int err = my_epoll_ctl(fd_epoll, fd_event, MY_EPOLL_OPCODE_ADD, &event);
     assert(!err);
 }
 
 void my_epoll_delete(my_epoll_t fd_epoll, int fd_event)
 {
     // The epoll_event struct has no effect - the event will no longer occur
-    int err = my_epoll_ctl(fd_epoll, MY_EPOLL_OPCODE_DELETE, fd_event, NULL);
+    int err = my_epoll_ctl(fd_epoll, fd_event, MY_EPOLL_OPCODE_DELETE, NULL);
     assert(!err);
 }
 

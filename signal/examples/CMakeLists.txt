@@ -7,6 +7,7 @@ target_link_libraries(signal_flag_good PRIVATE Threads::Threads)
 create_custom_gcc_targets(TARGET_NAME signal_flag_good)
 
 add_executable(signal_wait_single signal_wait_single.c)
+target_link_libraries(signal_wait_single PRIVATE Threads::Threads)
 
 add_executable(my_signal_wait my_signal_wait.c)
 target_link_libraries(my_signal_wait PRIVATE my_signal::my_signal)

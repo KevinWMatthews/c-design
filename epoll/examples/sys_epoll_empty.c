@@ -41,7 +41,10 @@ int main(void)
             printf("Epoll timeout occurred\n");
             continue;
         }
+
         // Process events in list
+        // No events in this example
+        assert(n_events == 0);
     }
 
     err = close(epfd);
