@@ -1,6 +1,7 @@
 /**
- * @file signalfd_wait.c
+ * @file signalfd_wait_single.c
  * Wait for a signal at the application level using signalfd.
+ * The application is single-threaded.
  * This example uses a blocking read, but this can be combined with epoll using a non-blocking
  * file descriptor (or by waiting on both file events and signals).
  */
@@ -37,24 +38,34 @@ int main(void)
     sfd = signalfd(sfd, &sigset, flags);
     assert(sfd != -1);
 
+    /*
+     * Block SIGINT
+     * This prevents the signal's default disposition (Term) from executing
+     */
     int how;
     sigset_t old_sigset = {0};
 #ifdef BLOCK_SIGINT
-    // Block SIGINT
-    // This prevents the signal's default disposition (Term) from executing
     printf("Blocking SIGINT\n");
     how = SIG_BLOCK;
-    // WARNING: not thread safe! For multi-threaded programs, use pthread_sigmask()
+    // WARNING: not thread safe!
+    // "The use of sigprocmask() is unspecified in a multithreaded process; see pthread_sigmask(3)"
     err = sigprocmask(how, &sigset, &old_sigset);
     assert(!err);
 #endif
 
+    /*
+     * Wait for SIGINT (blocking read)
+     */
     printf("Waiting for SIGINT...\n");
     struct signalfd_siginfo siginfo = {0};     // Can be an array
     ssize_t buffer_size = sizeof(siginfo);
     ssize_t bytes_read = read(sfd, &siginfo, buffer_size);
     assert(bytes_read == buffer_size);
 
+    /*
+     * Unblock SIGINT
+     * This allows a second SIGINT to execute the default disposition and terminate the application
+     */
 #ifdef UNBLOCK_SIGINT
     how = SIG_UNBLOCK;
     err = sigprocmask(how, &sigset, &old_sigset);
@@ -64,6 +75,9 @@ int main(void)
 
     printf("Received signal: %d\n", siginfo.ssi_signo);
 
+    /*
+     * Teardown
+     */
     err = close(sfd);
     assert(!err);
 
