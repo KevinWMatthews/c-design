@@ -56,6 +56,9 @@ void my_signal_change_thread_sigmask(sigset_t* signal_set, enum my_signal_sigmas
 {
     assert(signal_set);
     sigset_t* old_signal_set = NULL;
+    // In a multi threaded application:
+    // - sigprocmask() is unspecified
+    // - pthread_sigmask() is thread-safe
     int err = pthread_sigmask(how, signal_set, old_signal_set);
     assert(!err);
 }

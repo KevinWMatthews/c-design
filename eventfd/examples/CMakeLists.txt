@@ -1,3 +1,7 @@
+set(CMAKE_THREAD_PREFER_PTHREAD ON)
+set(THREADS_PREFER_PTHREAD_FLAG ON)
+find_package(Threads)
+
 add_executable(eventfd_blocking eventfd_blocking.c)
 
 add_executable(eventfd_blocking_multi eventfd_blocking_multi.c)

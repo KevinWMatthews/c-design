@@ -15,10 +15,6 @@ include(GccCustomTargets)
 include(CompilationDatabase)
 include(Unity)
 
-set(CMAKE_THREAD_PREFER_PTHREAD ON)
-set(THREADS_PREFER_PTHREAD_FLAG ON)
-find_package(Threads)
-
 add_subdirectory(asan)
 add_subdirectory(atomics)
 add_subdirectory(epoll)

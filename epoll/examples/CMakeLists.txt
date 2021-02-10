@@ -1,3 +1,7 @@
+set(CMAKE_THREAD_PREFER_PTHREAD ON)
+set(THREADS_PREFER_PTHREAD_FLAG ON)
+find_package(Threads)
+
 add_executable(my_epoll_empty my_epoll_empty.c)
 target_link_libraries(my_epoll_empty PRIVATE my_epoll::my_epoll)
 
@@ -9,7 +13,7 @@ target_link_libraries(my_epoll_event_intro
     PRIVATE
     my_epoll::my_epoll
     # TODO
-#    my_signalfd::my_signalfd
+    #    my_signalfd::my_signalfd
     my_timerfd::my_timerfd
     )
 

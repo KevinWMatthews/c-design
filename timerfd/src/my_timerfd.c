@@ -246,6 +246,7 @@ uint64_t my_timerfd_read(my_timerfd_t fd_timer)
     int err = read(fd_timer.fd, &n_timeouts, sizeof(n_timeouts));
     if (err == -1)
     {
+        // Rethink this. Should we force the use of epoll?
         // Should only occur for non-blocking file descriptors
         // Blocking file descriptors should never return EAGAIN/EWOULDBLOCK; they would block
         assert(errno == EAGAIN);

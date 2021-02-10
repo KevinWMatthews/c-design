@@ -14,5 +14,6 @@ target_link_libraries(my_pthread
     Threads::Threads
     )
 add_library(my_pthread::my_pthread ALIAS my_pthread)
+# TODO install public header file
 
 add_subdirectory(examples)
