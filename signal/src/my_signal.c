@@ -5,28 +5,28 @@
 #include <stddef.h>
 #include "my_signal.h"
 
-void my_signal_empty_set(sigset_t *signal_set)
+void my_signal_empty_set(sigset_t* signal_set)
 {
     assert(signal_set);
     int err = sigemptyset(signal_set);
     assert(!err);
 }
 
-void my_signal_fill_set(sigset_t *signal_set)
+void my_signal_fill_set(sigset_t* signal_set)
 {
     assert(signal_set);
     int err = sigfillset(signal_set);
     assert(!err);
 }
 
-void my_signal_add_to_set(sigset_t *signal_set, int signal_num)
+void my_signal_add_to_set(sigset_t* signal_set, int signal_num)
 {
     assert(signal_set);
     int err = sigaddset(signal_set, signal_num);
     assert(!err);
 }
 
-int my_signal_wait(sigset_t *signal_set)
+int my_signal_wait(sigset_t* signal_set)
 {
     assert(signal_set);
     int actual_signal_num;
@@ -44,18 +44,18 @@ void my_signal_wait_signal(int signal_num)
     assert(signal_num == actual_signal_num);
 }
 
-void my_signal_change_process_sigmask(sigset_t *signal_set, enum my_signal_sigmask_flags_t how)
+void my_signal_change_process_sigmask(sigset_t* signal_set, enum my_signal_sigmask_flags_t how)
 {
     assert(signal_set);
-    sigset_t *old_signal_set = NULL;
+    sigset_t* old_signal_set = NULL;
     int err = sigprocmask(how, signal_set, old_signal_set);
     assert(!err);
 }
 
-void my_signal_change_thread_sigmask(sigset_t *signal_set, enum my_signal_sigmask_flags_t how)
+void my_signal_change_thread_sigmask(sigset_t* signal_set, enum my_signal_sigmask_flags_t how)
 {
     assert(signal_set);
-    sigset_t *old_signal_set = NULL;
+    sigset_t* old_signal_set = NULL;
     int err = pthread_sigmask(how, signal_set, old_signal_set);
     assert(!err);
 }
@@ -78,7 +78,7 @@ void my_signal_unblock_signal(int signal_num)
 
 void my_signal_set_sigaction(int signal_num,
     my_signal_handler_t signal_handler,
-    sigset_t *signal_mask,
+    sigset_t* signal_mask,
     enum my_signal_sigaction_flags_t flags)
 {
     // sa_mask may be null?
