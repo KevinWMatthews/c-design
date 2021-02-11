@@ -12,6 +12,13 @@ target_link_libraries(signalfd_wait_multi_bad
     Threads::Threads
     )
 
+add_executable(my_signalfd_wait my_signalfd_wait.c)
+target_link_libraries(my_signalfd_wait
+    PRIVATE
+    my_signalfd::my_signalfd
+    my_signal::my_signal
+    )
+
 add_executable(my_signalfd_wait_single my_signalfd_wait_single.c)
 target_link_libraries(my_signalfd_wait_single
     PRIVATE

@@ -18,20 +18,20 @@ int main(void)
     printf("Starting...\n");
 
     enum my_signalfd_flags_t flags = MY_SIGNALFD_FLAG_BLOCKING;
-    my_signalfd_t fd_signal = my_signalfd_open_single(SIGINT, flags);
+    my_signalfd_t fd_signal = my_signalfd_open_signo(SIGINT, flags);
 
     int signo = SIGINT;
 #ifdef BLOCK_SIGINT
     printf("Blocking SIGINT\n");
-    my_signal_block_signal(signo);
+    my_signal_block_signo(signo);
 #endif
 
     printf("Waiting for SIGINT...\n");
-    int actual_signo = my_signalfd_read_single(fd_signal);
+    int actual_signo = my_signalfd_read_signo(fd_signal);
     assert(actual_signo == signo);
 
 #ifdef UNBLOCK_SIGINT
-    my_signal_unblock_signal(signo);
+    my_signal_unblock_signo(signo);
     printf("Unblocked SIGINT\n");
 #endif
 

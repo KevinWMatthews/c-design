@@ -19,7 +19,7 @@ int main(void)
      */
     int signo = SIGINT;
     enum my_signalfd_flags_t flags = MY_SIGNALFD_FLAG_BLOCKING;
-    my_signalfd_t fd_signal = my_signalfd_open_single(signo, flags);
+    my_signalfd_t fd_signal = my_signalfd_open_signo(signo, flags);
 
     /*
      * Block SIGINT
@@ -28,7 +28,7 @@ int main(void)
      * Block signals *before* spawning threads
      * Threads inherit the signal mask of their parent
      */
-    my_signal_block_signal(signo);
+    my_signal_block_signo(signo);
 
     /*
      * Spawn child thread
@@ -39,14 +39,14 @@ int main(void)
      * Wait for SIGINT (blocking read)
      */
     printf("Main thread waiting for SIGINT...\n");
-    int actual_signo = my_signalfd_read_single(fd_signal);
+    int actual_signo = my_signalfd_read_signo(fd_signal);
     assert(actual_signo == signo);
 
     /*
      * Unblock SIGINT
      * This allows a second SIGINT to execute the default disposition and terminate the application
      */
-    my_signal_unblock_signal(signo);
+    my_signal_unblock_signo(signo);
 
     printf("Main thread received signal: %d\n", actual_signo);
 
@@ -63,10 +63,10 @@ static void* thread_function(void* unused)
     printf("Spawned thread starting...\n");
     int signo = SIGINT;
     enum my_signalfd_flags_t flags = MY_SIGNALFD_FLAG_BLOCKING;
-    my_signalfd_t fd_signal = my_signalfd_open_single(signo, flags);
+    my_signalfd_t fd_signal = my_signalfd_open_signo(signo, flags);
 
     printf("Spawned thread waiting for SIGINT...\n");
-    int actual_signo = my_signalfd_read_single(fd_signal);
+    int actual_signo = my_signalfd_read_signo(fd_signal);
     assert(actual_signo == signo);
 
     printf("Spawned thread received signal: %d\n", actual_signo);

@@ -28,7 +28,7 @@ typedef struct my_signalfd_s
  * @param flags
  * @return
  */
-my_signalfd_t my_signalfd_open(sigset_t* sigset, enum my_signalfd_flags_t flags);
+my_signalfd_t my_signalfd_open_sigset(sigset_t* sigset, enum my_signalfd_flags_t flags);
 
 /**
  * @brief Open a signalfd that can receive a single signal.
@@ -36,7 +36,7 @@ my_signalfd_t my_signalfd_open(sigset_t* sigset, enum my_signalfd_flags_t flags)
  * @param flags
  * @return
  */
-my_signalfd_t my_signalfd_open_single(int signo, enum my_signalfd_flags_t flags);
+my_signalfd_t my_signalfd_open_signo(int signo, enum my_signalfd_flags_t flags);
 
 /**
  * @brief Close a signalfd.
@@ -45,9 +45,9 @@ void my_signalfd_close(my_signalfd_t);
 
 /**
  * @brief Read signals into a list.
- * @return The number of signals that were read.
+ * @return The number of signals that were read (not the number of bytes that were read!).
  */
-size_t my_signalfd_read(my_signalfd_t fd_signal,
+size_t my_signalfd_read_sigset(my_signalfd_t fd_signal,
     struct signalfd_siginfo* signal_list,
     size_t signal_list_len);
 
@@ -56,7 +56,7 @@ size_t my_signalfd_read(my_signalfd_t fd_signal,
  * @param fd_signal
  * @return The signal number.
  */
-int my_signalfd_read_single(my_signalfd_t fd_signal);
+int my_signalfd_read_signo(my_signalfd_t fd_signal);
 
 /**
  * @brief Clear any pending file reads on the signalfd.
@@ -69,7 +69,8 @@ int my_signalfd_read_single(my_signalfd_t fd_signal);
  *
  * @param fd_signal
  */
-void my_signalfd_clear_event(my_signalfd_t fd_signal, size_t signal_list_len);
+// TODO do we want this?
+void my_signalfd_clear_events(my_signalfd_t fd_signal, size_t signal_list_len);
 
 #endif
 

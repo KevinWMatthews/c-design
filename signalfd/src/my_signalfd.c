@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <errno.h>
 
-my_signalfd_t my_signalfd_open(sigset_t* sigset, enum my_signalfd_flags_t flags)
+my_signalfd_t my_signalfd_open_sigset(sigset_t* sigset, enum my_signalfd_flags_t flags)
 {
     assert(sigset);
     flags |= SFD_CLOEXEC;
@@ -22,7 +22,7 @@ my_signalfd_t my_signalfd_open(sigset_t* sigset, enum my_signalfd_flags_t flags)
     return my_signalfd;
 }
 
-my_signalfd_t my_signalfd_open_single(int signo, enum my_signalfd_flags_t flags)
+my_signalfd_t my_signalfd_open_signo(int signo, enum my_signalfd_flags_t flags)
 {
     sigset_t sigset = {0};
     my_signal_empty_set(&sigset);
@@ -45,7 +45,7 @@ void my_signalfd_close(my_signalfd_t fd_signal)
     assert(!err);
 }
 
-size_t my_signalfd_read(my_signalfd_t fd_signal,
+size_t my_signalfd_read_sigset(my_signalfd_t fd_signal,
     struct signalfd_siginfo* signal_list,
     size_t signal_list_len)
 {
@@ -61,16 +61,16 @@ size_t my_signalfd_read(my_signalfd_t fd_signal,
     return bytes_read / sizeof(*signal_list);
 }
 
-int my_signalfd_read_single(my_signalfd_t fd_signal)
+int my_signalfd_read_signo(my_signalfd_t fd_signal)
 {
     struct signalfd_siginfo signal_info = {0};
     size_t signal_info_len = sizeof(signal_info);
-    size_t signals_read = my_signalfd_read(fd_signal, &signal_info, signal_info_len);
+    size_t signals_read = my_signalfd_read_sigset(fd_signal, &signal_info, signal_info_len);
     assert(signals_read == 1 || signals_read == 0);
     return signal_info.ssi_signo;
 }
 
-void my_signalfd_clear_event(my_signalfd_t fd_signal, size_t signal_list_len)
+void my_signalfd_clear_events(my_signalfd_t fd_signal, size_t signal_list_len)
 {
     // TODO Rethink and test this algorithm!
     struct signalfd_siginfo* signal_list = calloc(signal_list_len, sizeof(*signal_list));
@@ -78,6 +78,6 @@ void my_signalfd_clear_event(my_signalfd_t fd_signal, size_t signal_list_len)
     size_t signals_read = 0;
     do
     {
-        signals_read = my_signalfd_read(fd_signal, signal_list, signal_list_len);
+        signals_read = my_signalfd_read_sigset(fd_signal, signal_list, signal_list_len);
     } while (signals_read);
 }
