@@ -73,7 +73,9 @@ int main(void)
     printf("SIGINT Unblocked\n");
 #endif
 
-    printf("Received signal: %d\n", siginfo.ssi_signo);
+    int actual_signo = siginfo.ssi_signo;
+    assert(actual_signo == signo);
+    printf("Received signal: %d\n", actual_signo);
 
     /*
      * Teardown

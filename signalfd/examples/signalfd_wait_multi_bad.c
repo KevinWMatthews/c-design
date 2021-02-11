@@ -89,7 +89,9 @@ int main(void)
     assert(!err);
     printf("SIGINT Unblocked\n");
 
-    printf("Main thread received signal: %d\n", siginfo.ssi_signo);
+    int actual_signo = siginfo.ssi_signo;
+    assert(actual_signo == signo);
+    printf("Main thread received signal: %d\n", actual_signo);
 
     /*
      * Teardown

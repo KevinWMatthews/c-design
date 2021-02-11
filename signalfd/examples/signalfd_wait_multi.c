@@ -25,6 +25,9 @@ int main(void)
     printf("Starting...\n");
     int err;
 
+    /*
+     * Create signalfd
+     */
     sigset_t sigset = {0};
     err = sigemptyset(&sigset);
     assert(!err);
@@ -80,7 +83,9 @@ int main(void)
     assert(!err);
     printf("Main thread unblocked SIGINT\n");
 
-    printf("Main thread received signal: %d\n", siginfo.ssi_signo);
+    int actual_signo = siginfo.ssi_signo;
+    assert(actual_signo == signo);
+    printf("Main thread received signal: %d\n", actual_signo);
 
     /*
      * Teardown
@@ -114,7 +119,9 @@ static void* thread_function(void* unused)
     ssize_t bytes_read = read(sfd, &siginfo, buffer_size);
     assert(bytes_read == buffer_size);
 
-    printf("Spawned thread received signal: %d\n", siginfo.ssi_signo);
+    int actual_signal = siginfo.ssi_signo;
+    assert(actual_signal == signo);
+    printf("Spawned thread received signal: %d\n", actual_signal);
 
     err = close(sfd);
     assert(!err);

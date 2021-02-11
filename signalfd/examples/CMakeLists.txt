@@ -18,3 +18,11 @@ target_link_libraries(my_signalfd_wait_single
     my_signalfd::my_signalfd
     my_signal::my_signal
     )
+
+add_executable(my_signalfd_wait_multi my_signalfd_wait_multi.c)
+target_link_libraries(my_signalfd_wait_multi
+    PRIVATE
+    my_signalfd::my_signalfd
+    my_signal::my_signal
+    my_pthread::my_pthread
+    )
