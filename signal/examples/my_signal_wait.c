@@ -11,7 +11,7 @@ int main(void)
     printf("Starting...\n");
     // If SIGINT is not blocked, then the process executes SIGINTs default disposition: Term
     // The application terminates immediately.
-    my_signal_block_signal(SIGINT);
+    my_signal_block_signo(SIGINT);
 
     printf("Waiting for SIGINT...\n");
     my_signal_wait_signal(SIGINT);
@@ -19,7 +19,7 @@ int main(void)
     // If SIGINT is not unblocked, then all further SIGINTs are effectively ignored.
     // They are queued for processing by the application.
     // Unblock as quickly as possible.
-    my_signal_unblock_signal(SIGINT);
+    my_signal_unblock_signo(SIGINT);
     printf("Received SIGINT\n");
 
     //*

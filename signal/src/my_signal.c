@@ -63,7 +63,17 @@ void my_signal_change_thread_sigmask(sigset_t* signal_set, enum my_signal_sigmas
     assert(!err);
 }
 
-void my_signal_block_signal(int signal_num)
+void my_signal_block_sigset(sigset_t* signal_set)
+{
+    my_signal_change_thread_sigmask(signal_set, SIG_BLOCK);
+}
+
+void my_signal_unblock_sigset(sigset_t* signal_set)
+{
+    my_signal_change_thread_sigmask(signal_set, SIG_UNBLOCK);
+}
+
+void my_signal_block_signo(int signal_num)
 {
     sigset_t signal_set = {0};
     my_signal_empty_set(&signal_set);
@@ -71,7 +81,7 @@ void my_signal_block_signal(int signal_num)
     my_signal_change_thread_sigmask(&signal_set, MY_SIGNAL_SIGMASK_FLAG_BLOCK);
 }
 
-void my_signal_unblock_signal(int signal_num)
+void my_signal_unblock_signo(int signal_num)
 {
     sigset_t signal_set = {0};
     my_signal_empty_set(&signal_set);
