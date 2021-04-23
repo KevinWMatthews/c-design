@@ -13,7 +13,7 @@
 #include <assert.h>
 #include <stdio.h>
 
-volatile sig_atomic_t flag;
+sig_atomic_t volatile flag;
 
 void sigint_handler(int signo)
 {
