@@ -19,7 +19,8 @@
 #include <stdio.h>
 
 // BUG: this must be volatile!
-// Without the volatile qualifier, access can be optimized away
+// Without the volatile qualifier, the compiler may not consider access to be a side effect
+// and can optimize aggressively.
 sig_atomic_t flag;
 
 void sigint_handler(int signo)
