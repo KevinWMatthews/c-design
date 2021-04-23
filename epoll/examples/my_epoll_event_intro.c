@@ -12,7 +12,7 @@ static void on_timer_event(my_epoll_t fd_epoll, int fd_event, my_epoll_event_dat
     // Alternate
     /*
     my_timerfd_t tfd = {
-        .fd = fd_event;
+        .fd = fd_event,
     };
     uint64_t n_timeouts = my_timerfd_read(tfd);
     // */
@@ -30,9 +30,6 @@ static void on_timer_event(my_epoll_t fd_epoll, int fd_event, my_epoll_event_dat
 
     printf("N timeouts: %" PRIu64 "\n", n_timeouts);
 }
-
-#include <sys/epoll.h>
-#include <assert.h>
 
 int main(void)
 {
